@@ -1,0 +1,7 @@
+version: '2'
+services:
+    cli:
+        build: .
+        volumes:
+            - ./:/util
+        env_file: .env
