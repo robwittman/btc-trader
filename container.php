@@ -48,6 +48,10 @@ $container->register('console.command.list_fundings', \BtcTrader\Command\Funding
  */
 $container->register('console.command.deposit', \BtcTrader\Command\DepositCommand::class)
     ->setArguments([new Reference('gdax.authenticated_client')]);
+$container->register('console.command.position', \BtcTrader\Command\PositionCommand::class)
+    ->setArguments([new Reference('gdax.authenticated_client')]);
+$container->register('console.command.withdraw', \BtcTrader\Command\WithdrawCommand::class)
+    ->setArguments([new Reference('gdax.authenticated_client')]);
 
 /**
  * Order Commands
@@ -55,6 +59,8 @@ $container->register('console.command.deposit', \BtcTrader\Command\DepositComman
 $container->register('console.command.cancel_order', \BtcTrader\Command\Order\CancelOrderCommand::class)
     ->setArguments([new Reference('gdax.authenticated_client')]);
 $container->register('console.command.list_orders', \BtcTrader\Command\Order\ListOrdersCommand::class)
+    ->setArguments([new Reference('gdax.authenticated_client')]);
+$container->register('console.command.watch_orders', \BtcTrader\Command\Order\OrderWatchCommand::class)
     ->setArguments([new Reference('gdax.authenticated_client')]);
 /**
  * Product Commands
@@ -75,8 +81,11 @@ $container->register('console.application', \BtcTrader\Application::class)
     ->addMethodCall('add', [new Reference('console.command.list_fundings')])
     ->addMethodCall('add', [new Reference('console.command.list_methods')])
     ->addMethodCall('add', [new Reference('console.command.deposit')])
+    ->addMethodCall('add', [new Reference('console.command.position')])
+    ->addMethodCall('add', [new Reference('console.command.withdraw')])
     ->addMethodCall('add', [new Reference('console.command.cancel_order')])
     ->addMethodCall('add', [new Reference('console.command.list_orders')])
+    ->addMethodCall('add', [new Reference('console.command.watch_orders')])
     ->addMethodCall('add', [new Reference('console.command.list_products')])
     ->addMethodCall('add', [new Reference('console.command.product_ticker')])
 ;
