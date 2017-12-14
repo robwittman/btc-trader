@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use GDAX\Clients\AuthenticatedClient;
 use GDAX\Types\Request\Authenticated\Account;
+use DateTime;
 
 class AccountHistoryCommand extends AbstractCommand
 {
@@ -36,10 +37,10 @@ class AccountHistoryCommand extends AbstractCommand
         $climate->table(array_map(function($ledger) {
             return array(
                 'id' => $ledger->getId(),
-                'created_at' => $ledger->getCreatedAt(),
+                'created_at' => $ledger->getCreatedAt()->format(DateTime::ATOM),
                 'amount' => $ledger->getAmount(),
                 'balance' => $ledger->getBalance(),
-                'type' => $ledger->getFee()
+                'type' => $ledger->getType()
             );
         }, $data));
     }

@@ -62,6 +62,8 @@ $container->register('console.command.list_orders', \BtcTrader\Command\Order\Lis
     ->setArguments([new Reference('gdax.authenticated_client')]);
 $container->register('console.command.watch_orders', \BtcTrader\Command\Order\OrderWatchCommand::class)
     ->setArguments([new Reference('gdax.authenticated_client')]);
+$container->register('console.command.cancel_all', \BtcTrader\Command\Order\CancelAllCommand::class)
+    ->setArguments([new Reference('gdax.authenticated_client')]);
 /**
  * Product Commands
  */
@@ -69,6 +71,13 @@ $container->register('console.command.list_products', \BtcTrader\Command\Product
     ->setArguments([new Reference('gdax.public_client')]);
 $container->register('console.command.product_ticker', \BtcTrader\Command\Product\ProductTickerCommand::class)
     ->setArguments([new Reference('gdax.public_client')]);
+/**
+ * Reporting commands
+ */
+ $container->register('console.command.historic_rates', \BtcTrader\Command\Report\HistoricRateCommand::class)
+     ->setArguments([new Reference('gdax.public_client')]);
+ $container->register('console.command.daily_rates', \BtcTrader\Command\Report\DailyStatsCommand::class)
+     ->setArguments([new Reference('gdax.public_client')]);
 /**
  * Register our Console Application
  */
@@ -84,8 +93,11 @@ $container->register('console.application', \BtcTrader\Application::class)
     ->addMethodCall('add', [new Reference('console.command.position')])
     ->addMethodCall('add', [new Reference('console.command.withdraw')])
     ->addMethodCall('add', [new Reference('console.command.cancel_order')])
+    ->addMethodCall('add', [new Reference('console.command.cancel_all')])
     ->addMethodCall('add', [new Reference('console.command.list_orders')])
     ->addMethodCall('add', [new Reference('console.command.watch_orders')])
     ->addMethodCall('add', [new Reference('console.command.list_products')])
     ->addMethodCall('add', [new Reference('console.command.product_ticker')])
+    ->addMethodCall('add', [new Reference('console.command.historic_rates')])
+    ->addMethodCall('add', [new Reference('console.command.daily_rates')])
 ;
