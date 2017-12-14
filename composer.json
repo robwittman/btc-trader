@@ -14,7 +14,8 @@
         "symfony/config": "^3.4",
         "symfony/dependency-injection": "^3.4",
         "gabrielbull/websocket-client": "^0.3.1",
-        "textalk/websocket": "^1.2"
+        "textalk/websocket": "^1.2",
+        "league/csv": "^9.1"
     },
     "autoload": {
         "psr-4": {

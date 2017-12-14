@@ -78,6 +78,8 @@ $container->register('console.command.product_ticker', \BtcTrader\Command\Produc
      ->setArguments([new Reference('gdax.public_client')]);
  $container->register('console.command.daily_rates', \BtcTrader\Command\Report\DailyStatsCommand::class)
      ->setArguments([new Reference('gdax.public_client')]);
+ $container->register('console.command.dataset', \BtcTrader\Command\Report\DatasetCommand::class)
+     ->setArguments([new Reference('gdax.public_client')]);
 /**
  * Register our Console Application
  */
@@ -100,4 +102,5 @@ $container->register('console.application', \BtcTrader\Application::class)
     ->addMethodCall('add', [new Reference('console.command.product_ticker')])
     ->addMethodCall('add', [new Reference('console.command.historic_rates')])
     ->addMethodCall('add', [new Reference('console.command.daily_rates')])
+    ->addMethodCall('add', [new Reference('console.command.dataset')])
 ;
